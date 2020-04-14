@@ -10,7 +10,8 @@ export default function Jobs() {
       let [jobs,setJobs]=useState([])
 
     const getData = async()=>{
-        let url ="http://localhost:3001/jobs"
+        // let url ="http://localhost:3001/jobs"
+        let url=`https://my-json-server.typicode.com/legobitna/Itviec/jobs`
         let data = await fetch(url)
         let result =await data.json()
         console.log("result",result)

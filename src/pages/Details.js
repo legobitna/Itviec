@@ -11,9 +11,10 @@ import moment from 'moment'
 export default function Details() {
     const {id} = useParams()
     let [job,setJob]=useState(null);
-
+    
     const getData =async() =>{
-        let url = `http://localhost:3001/jobs/${id}`
+        //let url = `http://localhost:3001/jobs/${id}`
+        let url=`https://my-json-server.typicode.com/legobitna/Itviec/jobs/${id}`
      
         let data = await fetch(url)
         let result = await data.json();
