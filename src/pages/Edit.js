@@ -8,7 +8,8 @@ export default function Edit() {
     let [job,setJob] = useState(null)
 
     const getData = async() =>{
-        let url = `http://localhost:3001/jobs/${id}`
+        // let url = `http://localhost:3001/jobs/${id}`
+        let url=`https://my-json-server.typicode.com/legobitna/Itviec/jobs/${id}`
      
         let data = await fetch(url)
         let result = await data.json();
@@ -30,7 +31,8 @@ export default function Edit() {
           };
           try {
             const response = await fetch(
-              `http://localhost:3001/jobs/${job.id}`,
+            //   `http://localhost:3001/jobs/${job.id}`,
+            ` https://my-json-server.typicode.com/legobitna/Itviec/jobs/${id}`,
               config
             );
             history.push("/")
