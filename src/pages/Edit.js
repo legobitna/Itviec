@@ -35,6 +35,7 @@ export default function Edit() {
             ` https://my-json-server.typicode.com/legobitna/Itviec/jobs/${id}`,
               config
             );
+            console.log("Rr",response)
             history.push("/")
           } catch (error) {
             console.log("Oops");

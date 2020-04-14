@@ -42,7 +42,7 @@ export default function Jobs() {
           </div>
         </div>
         <div className="job-list">
-          <h1>1,030 IT jobs in Vietnam for you</h1>
+    <h1>{jobs&&jobs.length} IT jobs in Vietnam for you</h1>
           {jobs && jobs.map((item)=><JobList job={item}/>)}
           
         </div>
