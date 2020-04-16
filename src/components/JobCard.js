@@ -3,14 +3,31 @@ import { Row, Col, Badge } from "react-bootstrap";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 
-export default function JobCard(props) {
-  let item = props.job;
+/**
+Sample prop job:
+{
+    id: 0,
+    img: "https://cdn.itviec.com/employers/antada/logo/s65/re9ZtCRGvxqdPL8otJ8Ca8zR/ANTADA%20-%20LOGO_final.png",
+    title: "Game developer",
+    salary: 2500,
+    city: "Ho Chi Minh",
+    district: 3,
+    time: 1586762303771,
+    tags: [],
+    isHotjob:true,
+    benefit: [],
+    description: "Experience in React"
+},
+
+**/
+
+export default function JobCard({ job }) {
   let history = useHistory();
 
   const jobSelect = () => {
-    history.push(`/job/${item.id}`);
+    history.push(`/job/${job.id}`);
   };
-  if (item == null) {
+  if (job == null) {
     return <div>no data yet</div>;
   }
   return (
@@ -18,24 +35,24 @@ export default function JobCard(props) {
       <Row>
         <Col>
           <div className="jobcard-logo">
-            <img src={item.img} />
+            <img src={job.img} />
           </div>
         </Col>
         <Col xs={8}>
           <div className="jobcard-descriptions">
-            <h2 className="jobcard-title">{item.title}</h2>
-            <div>$ {item.salary}</div>
+            <h2 className="jobcard-title">{job.title}</h2>
+            <div>$ {job.salary}</div>
             <div>
               <ul className="jobcard-benefit">
-                {item.benefit.map((item) => (
-                  <li>{item}</li>
+                {job.benefit.map((job) => (
+                  <li>{job}</li>
                 ))}
               </ul>
             </div>
             <div>
-              {item.tags.map((item) => (
+              {job.tags.map((job) => (
                 <Badge variant="secondary" style={{ marginRight: "10px" }}>
-                  {item}
+                  {job}
                 </Badge>
               ))}
             </div>
@@ -43,17 +60,17 @@ export default function JobCard(props) {
         </Col>
         <Col>
           <div className="date-location-box">
-            {item.isHotjob ? (
+            {job.isHotjob ? (
               <div className="hotjob-label">Hot Job</div>
             ) : (
               <div></div>
             )}
 
             <div className="jobcard-location">
-              <div>{item.city}</div>
-              <div>District {item.district}</div>
+              <div>{job.city}</div>
+              <div>District {job.district}</div>
             </div>
-            <div style={{ color: "#06c" }}>{moment(item.time).fromNow()}</div>
+            <div style={{ color: "#06c" }}>{moment(job.time).fromNow()}</div>
           </div>
         </Col>
       </Row>
