@@ -5,7 +5,7 @@ import {Row, Col,Badge} from "react-bootstrap"
 import moment from 'moment'
 import {useHistory} from 'react-router-dom'
 
-export default function JobList(props) {
+export default function JobCard(props) {
     let item = props.job
     let history=useHistory();
 

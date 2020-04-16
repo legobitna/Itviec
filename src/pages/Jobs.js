@@ -1,6 +1,6 @@
 import React ,{useState,useEffect}from 'react'
 import '../App.css';
-import JobList from '../components/JobList'
+import JobCard from '../components/JobCard'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -43,7 +43,7 @@ export default function Jobs() {
         </div>
         <div className="job-list">
     <h1>{jobs&&jobs.length} IT jobs in Vietnam for you</h1>
-          {jobs && jobs.map((item)=><JobList job={item}/>)}
+          {jobs && jobs.map((item)=><JobCard job={item}/>)}
           
         </div>
       </div>
