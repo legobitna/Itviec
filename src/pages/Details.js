@@ -54,9 +54,9 @@ export default function Details() {
             <Col xs={10}>
               <h2>{job.title}</h2>
               <div>
-                {job.tags.map((item) => (
+                {job.tags.map(tag => (
                   <Badge variant="secondary" style={{ marginRight: "10px" }}>
-                    {item}
+                    {tag}
                   </Badge>
                 ))}
               </div>
@@ -84,8 +84,8 @@ export default function Details() {
               <div style={{ paddingTop: "20px" }}>
                 <h2>Benefit</h2>
                 <ul className="benefit-list" style={{ fontSize: "18px" }}>
-                  {job.benefit.map((item) => (
-                    <li>{item}</li>
+                  {job.benefits.map(benefit => (
+                    <li>{benefit}</li>
                   ))}
                 </ul>
               </div>

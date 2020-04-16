@@ -11,11 +11,11 @@ Sample prop job:
     title: "Game developer",
     salary: 2500,
     city: "Ho Chi Minh",
-    district: 3,
+    district: "3",
     time: 1586762303771,
     tags: [],
     isHotjob:true,
-    benefit: [],
+    benefits: [],
     description: "Experience in React"
 },
 
@@ -44,15 +44,15 @@ export default function JobCard({ job }) {
             <div>$ {job.salary}</div>
             <div>
               <ul className="benefit-list">
-                {job.benefit.map((job) => (
-                  <li>{job}</li>
+                {job.benefits.map(benefit => (
+                  <li>{benefit}</li>
                 ))}
               </ul>
             </div>
             <div>
-              {job.tags.map((job) => (
-                <Badge variant="secondary" style={{ marginRight: "10px" }}>
-                  {job}
+              {job.tags.map(tag => (
+                <Badge variant="secondary" className="badge-style">
+                  {tag}
                 </Badge>
               ))}
             </div>
@@ -70,7 +70,7 @@ export default function JobCard({ job }) {
               <div>{job.city}</div>
               <div>District {job.district}</div>
             </div>
-            <div style={{ color: "#06c" }}>{moment(job.time).fromNow()}</div>
+            <div className="job-time">{moment(job.time).fromNow()}</div>
           </div>
         </Col>
       </Row>

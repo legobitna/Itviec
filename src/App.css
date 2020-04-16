@@ -107,7 +107,6 @@
   background: white !important;
   border-color: transparent;
   box-shadow: 0 0 5px 1px #bcbcbc;
-  z-index: 5;
   cursor: pointer;
 }
 .jobcard-logo {
@@ -128,7 +127,7 @@
   font-weight: 500;
   font-size: 14px;
   margin: 10px 0px;
-  padding: 0 0 0 19px;
+  padding-left: 19px;
 }
 .date-location-box {
   display: flex;
@@ -151,4 +150,10 @@
 }
 .jobcard-location {
   color: #a6a8ab;
+}
+.badge-style {
+  margin-right: "10px";
+}
+.job-time {
+  color: #06c 
 }
