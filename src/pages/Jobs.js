@@ -39,14 +39,13 @@ export default function Jobs() {
           <Row className="search-form-wrapper">
             <Col xs={12} md={10}>
               <div className="search-section-wrapper">
-                <Row class="search-field-wrapper">
-                  <Col md={1}>
-                    <FontAwesomeIcon
-                      icon={faSearch}
-                      style={{ marginRight: "10px", marginLeft: "10px" }}
-                    />
-                  </Col>
-                  <Col md={11}>
+                <Row className="search-field-wrapper" noGutters={true}>
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    style={{ marginRight: "10px", marginLeft: "10px" }}
+                  />
+
+                  <Col col={12}>
                     <input
                       type="text"
                       className="search-box"

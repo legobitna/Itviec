@@ -14,7 +14,7 @@ export default function CreateJob() {
         </div>
       </div>
       <div className="middle">
-        <Form className="login-form">
+        <Form className="white-container">
           <Form.Row>
               
             <Form.Group as={Col} controlId="formGridTitle">

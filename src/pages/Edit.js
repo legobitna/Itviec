@@ -30,7 +30,7 @@ export default function Details() {
   }
   return (
     <div className="App">
-      <div className="search-header-login">
+      <div className="navigation">
         <div className="page-menu">
           <img
             className="logo-itviec"
@@ -40,7 +40,7 @@ export default function Details() {
         </div>
       </div>
       <div className="middle">
-        <div className="login-form">
+        <div className="white-container">
           <div style={{ textAlign: "right" }}>
             <Link to={`/edit/${job.id}`} style={{ marginRight: "10px" }}>
               Edit
@@ -83,7 +83,7 @@ export default function Details() {
               </div>
               <div style={{ paddingTop: "20px" }}>
                 <h2>Benefit</h2>
-                <ul className="jobcard-benefit" style={{ fontSize: "18px" }}>
+                <ul className="benefit-list" style={{ fontSize: "18px" }}>
                   {job.benefit.map((item) => (
                     <li>{item}</li>
                   ))}

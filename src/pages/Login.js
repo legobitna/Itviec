@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -17,18 +17,21 @@ export default function Login() {
   };
   return (
     <div className="App">
-      <div className="search-header-login">
-        <div className="page-menu">
+      <div className="navigation">
+        <Container>
           <img
             className="logo-itviec"
             alt="itviec"
             src="https://itviec.com/assets/logo-itviec-65afac80e92140efa459545bc1c042ff4275f8f197535f147ed7614c2000ab0f.png"
           />
-        </div>
+        </Container>
       </div>
-      <div className="middle">
-        <h1>Login</h1>
-        <Form className="login-form" onSubmit={(e) => login(e)}>
+      <Container className="middle">
+        <Form className="white-container" onSubmit={(e) => login(e)}>
+          <div className="login-title-box">
+            <img src="https://itviec.com/favicon-96x96.png" width="40px" />
+            <h1 className="login-title">Login</h1>
+          </div>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -56,7 +59,7 @@ export default function Login() {
             Submit
           </Button>
         </Form>
-      </div>
+      </Container>
     </div>
   );
 }

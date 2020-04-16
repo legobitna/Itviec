@@ -43,7 +43,7 @@ export default function JobCard({ job }) {
             <h2 className="jobcard-title">{job.title}</h2>
             <div>$ {job.salary}</div>
             <div>
-              <ul className="jobcard-benefit">
+              <ul className="benefit-list">
                 {job.benefit.map((job) => (
                   <li>{job}</li>
                 ))}
