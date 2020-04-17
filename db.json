@@ -2,7 +2,7 @@
   "jobs": [
     {
       "id": 0,
-      "img": "../images/Logo1.png",
+      "img": "/images/Logo1.png",
       "title": "Designer -Balancing/Mid-core 3D RPG",
       "salary": "2500",
       "city": "Ho Chi Minh",
@@ -23,7 +23,7 @@
     },
     {
       "id": 1,
-      "img": "../images/Logo2.png",
+      "img": "/images/Logo2.png",
       "title": "Software Engineer (Linux, Agile)",
       "salary": 2000,
       "city": "Ho Chi Minh",

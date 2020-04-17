@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 Sample prop job:
 {
     id: 0,
-    img: "https://cdn.itviec.com/employers/antada/logo/s65/re9ZtCRGvxqdPL8otJ8Ca8zR/ANTADA%20-%20LOGO_final.png",
+    img: "/images/Logo1.png",
     title: "Game developer",
     salary: 2500,
     city: "Ho Chi Minh",
