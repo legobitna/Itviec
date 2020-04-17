@@ -2,7 +2,7 @@
   "jobs": [
     {
       "id": 0,
-      "img": "https://cdn.itviec.com/employers/antada/logo/s65/re9ZtCRGvxqdPL8otJ8Ca8zR/ANTADA%20-%20LOGO_final.png",
+      "img": "../images/Logo1.png",
       "title": "Designer -Balancing/Mid-core 3D RPG",
       "salary": "2500",
       "city": "Ho Chi Minh",
@@ -23,7 +23,7 @@
     },
     {
       "id": 1,
-      "img": "https://cdn.itviec.com/employers/dek-technologies/logo/s65/e2ZfGH9EqNcBbcQ7nKUpvkEb/dek-technologies-logo.png",
+      "img": "../images/Logo2.png",
       "title": "Software Engineer (Linux, Agile)",
       "salary": 2000,
       "city": "Ho Chi Minh",

@@ -55,7 +55,7 @@ export default function Details() {
               <h2>{job.title}</h2>
               <div>
                 {job.tags.map(tag => (
-                  <Badge variant="secondary" style={{ marginRight: "10px" }}>
+                  <Badge variant="secondary" className="badge-style">
                     {tag}
                   </Badge>
                 ))}

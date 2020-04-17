@@ -5,7 +5,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Jobs from "./pages/Jobs";
 import Login from "./pages/Login";
 import Details from "./pages/Details";
-import Edit from "./pages/Edit";
 import { useSelector } from "react-redux";
 function App() {
   let user = useSelector((state) => state.user);
@@ -26,7 +25,7 @@ function App() {
           path="/job/:id"
           render={(props) => <Details {...props} />}
         />
-        <Route path="/edit/:id" exact component={Edit} />
+        
       </Switch>
     </div>
   );
