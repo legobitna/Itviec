@@ -9,7 +9,6 @@ export default function Jobs() {
   let originalList = [];
   let [jobs, setJobs] = useState([]);
   let [keyword, setKeyword] = useState("");
-  const [encode, setEncode] = useState("");
   let history = useHistory();
   let searchTerm = [];
 
@@ -41,11 +40,10 @@ export default function Jobs() {
 
   useEffect(() => {
     getData();
-  }, [encode]);
+  }, [keyword]);
 
   const search = (e) => {
     e.preventDefault();
-    setEncode(encodeURIComponent(keyword));
     history.push("/jobs/?q=" + encodeURIComponent(keyword));
   };
 
@@ -68,7 +66,7 @@ export default function Jobs() {
                   <Row className="search-field-wrapper" noGutters={true}>
                     <FontAwesomeIcon
                       icon={faSearch}
-                      style={{ marginRight: "10px", marginLeft: "10px" }}
+                      className="icon-fasearch"
                     />
 
                     <Col col={12}>

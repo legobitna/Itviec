@@ -61,6 +61,11 @@
   background-color: #d82727;
 }
 
+.icon-fasearch {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .job-list {
   background-color: white;
   border: 1px solid #d8d8d8;
