@@ -3,14 +3,20 @@ import JobList from "../components/JobCard";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, Col, Container, Form } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 export default function Jobs() {
   let originalList = [];
   let [jobs, setJobs] = useState([]);
   let [keyword, setKeyword] = useState("");
+  let [encode, setEncode] = useState("");
   let history = useHistory();
   let searchTerm = [];
+  let query = useQuery();
 
   const getData = async () => {
     //let url ="http://localhost:3001/jobs";
@@ -23,10 +29,9 @@ export default function Jobs() {
 
   const getQuery = (arr) => {
     let filteredList = [];
-    let queryString = window.location.search;
-    let splitQueryString = queryString.split("?q=");
-    if (splitQueryString.length > 1) {
-      searchTerm = splitQueryString[1].split("%20");
+    let searchParam = query.get("q");
+    if (searchParam) {
+      searchTerm = searchParam.split(" ");
       filteredList = arr.filter((item) =>
         searchTerm.some((key) =>
           item.title.toLowerCase().includes(key.toLowerCase())
@@ -40,10 +45,11 @@ export default function Jobs() {
 
   useEffect(() => {
     getData();
-  }, [keyword]);
+  }, [encode]);
 
   const search = (e) => {
     e.preventDefault();
+    setEncode(encodeURIComponent(keyword));
     history.push("/jobs/?q=" + encodeURIComponent(keyword));
   };
 
