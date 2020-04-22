@@ -10,48 +10,56 @@ function useQuery() {
 }
 
 export default function Jobs() {
-  let originalList = [];
+  let [originalList, setOriginalList] = useState([]);
   let [jobs, setJobs] = useState([]);
   let [keyword, setKeyword] = useState("");
   let [encode, setEncode] = useState("");
   let history = useHistory();
   let searchTerm = [];
   let query = useQuery();
+  let filteredList = [];
 
   const getData = async () => {
+    console.log("here1");
     //let url ="http://localhost:3001/jobs";
     let url = `https://my-json-server.typicode.com/legobitna/Itviec/jobs`;
     let data = await fetch(url);
     let result = await data.json();
-    originalList = result;
-    getQuery(originalList);
+    setOriginalList(result);
+    setJobs(result);
   };
 
-  const getQuery = (arr) => {
-    let filteredList = [];
+  const getQuery = () => {
+    console.log("ori", originalList);
+    console.log("here2");
+    filteredList = originalList;
     let searchParam = query.get("q");
     if (searchParam) {
       searchTerm = searchParam.split(" ");
-      filteredList = arr.filter((item) =>
+      filteredList = filteredList.filter((item) =>
         searchTerm.some((key) =>
           item.title.toLowerCase().includes(key.toLowerCase())
         )
       );
-    } else {
-      filteredList = arr;
     }
     setJobs(filteredList);
   };
-
-  useEffect(() => {
-    getData();
-  }, [encode]);
 
   const search = (e) => {
     e.preventDefault();
     setEncode(encodeURIComponent(keyword));
     history.push("/jobs/?q=" + encodeURIComponent(keyword));
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    if (jobs.length > 0) {
+      getQuery();
+    }
+  }, [encode]);
 
   return (
     <div className="App">
