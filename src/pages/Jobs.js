@@ -9,57 +9,45 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
+const QUERYSTR_PREFIX = 'q';
+
 export default function Jobs() {
-  let [originalList, setOriginalList] = useState([]);
+  let [originalJobs, setOriginalJobs] = useState([]);
   let [jobs, setJobs] = useState([]);
-  let [keyword, setKeyword] = useState("");
-  let [encode, setEncode] = useState("");
   let history = useHistory();
-  let searchTerm = [];
   let query = useQuery();
-  let filteredList = [];
+  let [keyword, setKeyword] = useState(query.get(QUERYSTR_PREFIX));
 
   const getData = async () => {
-    console.log("here1");
     //let url ="http://localhost:3001/jobs";
     let url = `https://my-json-server.typicode.com/legobitna/Itviec/jobs`;
     let data = await fetch(url);
     let result = await data.json();
-    setOriginalList(result);
-    setJobs(result);
+    setOriginalJobs(result); 
   };
 
-  const getQuery = () => {
-    console.log("ori", originalList);
-    console.log("here2");
-    filteredList = originalList;
-    let searchParam = query.get("q");
-    if (searchParam) {
-      searchTerm = searchParam.split(" ");
-      filteredList = filteredList.filter((item) =>
-        searchTerm.some((key) =>
-          item.title.toLowerCase().includes(key.toLowerCase())
-        )
+  const handleSearch = e => {
+    let filteredJobs = originalJobs;
+    if(e) {
+      e.preventDefault();
+      history.push(`/jobs/?${QUERYSTR_PREFIX}=${encodeURIComponent(keyword)}`);
+    }
+    if(keyword) {
+      filteredJobs = originalJobs.filter(job => 
+        job.title.toLowerCase().includes(keyword.toLowerCase())
       );
     }
-    setJobs(filteredList);
-  };
-
-  const search = (e) => {
-    e.preventDefault();
-    setEncode(encodeURIComponent(keyword));
-    history.push("/jobs/?q=" + encodeURIComponent(keyword));
+    setJobs(filteredJobs);
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  useEffect(() => {
-    if (jobs.length > 0) {
-      getQuery();
-    }
-  }, [encode]);
+  useEffect( () => {
+    handleSearch();
+  }, [originalJobs]);
+
 
   return (
     <div className="App">
@@ -73,7 +61,7 @@ export default function Jobs() {
               src="https://itviec.com/assets/logo-itviec-65afac80e92140efa459545bc1c042ff4275f8f197535f147ed7614c2000ab0f.png"
             />
           </Col>
-          <Form onSubmit={(e) => search(e)}>
+          <Form onSubmit={handleSearch}>
             <Row className="search-form-wrapper">
               <Col xs={12} md={10}>
                 <div className="search-section-wrapper">
@@ -89,7 +77,7 @@ export default function Jobs() {
                         type="text"
                         className="search-box"
                         placeholder="Keyword skill(Java,IOS...),Job Title,Company..."
-                        onChange={(e) => setKeyword(e.target.value)}
+                        onChange={ e => setKeyword(e.target.value) }
                       />
                     </Col>
                   </Row>
@@ -106,8 +94,8 @@ export default function Jobs() {
       </div>
       <Container>
         <div className="job-list">
-          <h1>{jobs && jobs.length} IT jobs in Vietnam for you</h1>
-          {jobs && jobs.map((item) => <JobList job={item} />)}
+          <h1>{jobs && jobs.length} IT job{jobs.length != 1 ? 's': ''} in Vietnam for you </h1>
+          {jobs && jobs.map(item => <JobList job={item} key={item.id} />)}
         </div>
       </Container>
     </div>
