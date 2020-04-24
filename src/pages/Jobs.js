@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import JobList from "../components/JobCard";
+import JobCard from "../components/JobCard";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, Col, Container, Form } from "react-bootstrap";
@@ -9,7 +9,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const QUERYSTR_PREFIX = 'q';
+const QUERYSTR_PREFIX = "q";
 
 export default function Jobs() {
   let [originalJobs, setOriginalJobs] = useState([]);
@@ -23,17 +23,17 @@ export default function Jobs() {
     let url = `https://my-json-server.typicode.com/legobitna/Itviec/jobs`;
     let data = await fetch(url);
     let result = await data.json();
-    setOriginalJobs(result); 
+    setOriginalJobs(result);
   };
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     let filteredJobs = originalJobs;
-    if(e) {
+    if (e) {
       e.preventDefault();
       history.push(`/jobs/?${QUERYSTR_PREFIX}=${encodeURIComponent(keyword)}`);
     }
-    if(keyword) {
-      filteredJobs = originalJobs.filter(job => 
+    if (keyword) {
+      filteredJobs = originalJobs.filter(job =>
         job.title.toLowerCase().includes(keyword.toLowerCase())
       );
     }
@@ -44,10 +44,9 @@ export default function Jobs() {
     getData();
   }, []);
 
-  useEffect( () => {
+  useEffect(() => {
     handleSearch();
   }, [originalJobs]);
-
 
   return (
     <div className="App">
@@ -76,8 +75,8 @@ export default function Jobs() {
                         value={keyword}
                         type="text"
                         className="search-box"
-                        placeholder="Keyword skill(Java,IOS...),Job Title,Company..."
-                        onChange={ e => setKeyword(e.target.value) }
+                        placeholder="Keyword skill(Java,IOS...),Job Title..."
+                        onChange={(e) => setKeyword(e.target.value)}
                       />
                     </Col>
                   </Row>
@@ -94,8 +93,11 @@ export default function Jobs() {
       </div>
       <Container>
         <div className="job-list">
-          <h1>{jobs && jobs.length} IT job{jobs.length != 1 ? 's': ''} in Vietnam for you </h1>
-          {jobs && jobs.map(item => <JobList job={item} key={item.id} />)}
+          <h1>
+            {jobs && jobs.length} IT job{jobs.length != 1 ? "s" : ""} in Vietnam
+            for you{" "}
+          </h1>
+          {jobs && jobs.map(item => <JobCard job={item} key={item.id} />)}
         </div>
       </Container>
     </div>
