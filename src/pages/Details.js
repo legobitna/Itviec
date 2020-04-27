@@ -13,8 +13,8 @@ export default function Details() {
   let [job, setJob] = useState(null);
 
   const getData = async () => {
-    //let url = `http://localhost:3001/jobs/${id}`
-    let url = `https://my-json-server.typicode.com/legobitna/Itviec/jobs/${id}`;
+    let url = `http://localhost:${process.env.REACT_APP_JSON_DEV_PORT}/jobs/${id}`
+    //let url = process.env.REACT_APP_PRODUCTION_JSON_URL +`/${id}`;
 
     let data = await fetch(url);
     let result = await data.json();
