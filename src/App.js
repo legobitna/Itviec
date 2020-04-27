@@ -20,12 +20,12 @@ function App() {
     <div>
       <Switch>
         <Route path="/login" exact component={Login} />
+        <Route path="/jobs/" exact component={Jobs} />
         <Route path="/" exact component={Jobs} />
         <ProtectedRoute
           path="/job/:id"
           render={(props) => <Details {...props} />}
         />
-        
       </Switch>
     </div>
   );

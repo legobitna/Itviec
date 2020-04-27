@@ -1,28 +1,52 @@
 import React, { useState, useEffect } from "react";
-import JobList from "../components/JobCard";
+import JobCard from "../components/JobCard";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Form } from "react-bootstrap";
+import { useHistory, useLocation } from "react-router-dom";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+const QUERYSTR_PREFIX = "q";
+
 export default function Jobs() {
-  let originalList = [];
-  let filteredList = [];
+  let [originalJobs, setOriginalJobs] = useState([]);
   let [jobs, setJobs] = useState([]);
-  let keyword = "";
+  let history = useHistory();
+  let query = useQuery();
+  let [keyword, setKeyword] = useState(query.get(QUERYSTR_PREFIX));
 
   const getData = async () => {
     //let url ="http://localhost:3001/jobs";
     let url = `https://my-json-server.typicode.com/legobitna/Itviec/jobs`;
     let data = await fetch(url);
     let result = await data.json();
-    originalList = result;
-
-    setJobs(result);
+    setOriginalJobs(result);
   };
+
+  const handleSearch = (e) => {
+    let filteredJobs = originalJobs;
+    if (e) {
+      e.preventDefault();
+      history.push(`/jobs/?${QUERYSTR_PREFIX}=${encodeURIComponent(keyword)}`);
+    }
+    if (keyword) {
+      filteredJobs = originalJobs.filter(job =>
+        job.title.toLowerCase().includes(keyword.toLowerCase())
+      );
+    }
+    setJobs(filteredJobs);
+  };
+
   useEffect(() => {
     getData();
   }, []);
 
-  const search = () => {};
+  useEffect(() => {
+    handleSearch();
+  }, [originalJobs]);
 
   return (
     <div className="App">
@@ -36,38 +60,44 @@ export default function Jobs() {
               src="https://itviec.com/assets/logo-itviec-65afac80e92140efa459545bc1c042ff4275f8f197535f147ed7614c2000ab0f.png"
             />
           </Col>
-          <Row className="search-form-wrapper">
-            <Col xs={12} md={10}>
-              <div className="search-section-wrapper">
-                <Row className="search-field-wrapper" noGutters={true}>
-                  <FontAwesomeIcon
-                    icon={faSearch}
-                    style={{ marginRight: "10px", marginLeft: "10px" }}
-                  />
-
-                  <Col col={12}>
-                    <input
-                      type="text"
-                      className="search-box"
-                      placeholder="Keyword skill(Java,IOS...),Job Title,Company..."
-                      onChange={(e) => (keyword = e.target.value)}
+          <Form onSubmit={handleSearch}>
+            <Row className="search-form-wrapper">
+              <Col xs={12} md={10}>
+                <div className="search-section-wrapper">
+                  <Row className="search-field-wrapper" noGutters={true}>
+                    <FontAwesomeIcon
+                      icon={faSearch}
+                      className="icon-fasearch"
                     />
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-            <Col xs={12} md={2}>
-              <button className="search-button" onClick={() => search()}>
-                Search
-              </button>
-            </Col>
-          </Row>
+
+                    <Col col={12}>
+                      <input
+                        value={keyword}
+                        type="text"
+                        className="search-box"
+                        placeholder="Keyword skill(Java,IOS...),Job Title..."
+                        onChange={(e) => setKeyword(e.target.value)}
+                      />
+                    </Col>
+                  </Row>
+                </div>
+              </Col>
+              <Col xs={12} md={2}>
+                <button className="search-button" type="submit">
+                  Search
+                </button>
+              </Col>
+            </Row>
+          </Form>
         </Container>
       </div>
       <Container>
         <div className="job-list">
-          <h1>{jobs && jobs.length} IT jobs in Vietnam for you</h1>
-          {jobs && jobs.map((item) => <JobList job={item} />)}
+          <h1>
+            {jobs && jobs.length} IT job{jobs.length != 1 ? "s" : ""} in Vietnam
+            for you{" "}
+          </h1>
+          {jobs && jobs.map(item => <JobCard job={item} key={item.id} />)}
         </div>
       </Container>
     </div>
