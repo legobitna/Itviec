@@ -19,11 +19,11 @@ export default function Jobs() {
   let [keyword, setKeyword] = useState(query.get(QUERYSTR_PREFIX));
 
   const getData = async () => {
-    let url =`http://localhost:${process.env.REACT_APP_JSON_DEV_PORT}/jobs`;
-    //let url = process.env.REACT_APP_PRODUCTION_JSON_URL;
+    let url =`${process.env.REACT_APP_BACKEND_SERVER_URL}/jobs`;
     console.log("vu",url)
     let data = await fetch(url);
     let result = await data.json();
+    console.log("Rr",result)
     setOriginalJobs(result);
   };
 
