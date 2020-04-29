@@ -1,68 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## Environment setup
 
-### `npm start`
+you need 2 modes for this project : development mode, production mode.<br />
+Development mode is the environment that you will only use while you are developing.<br />
+Production mode is the environment that you will use after you deploy you project.<br />
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+For example, you only use `localhost` when you develop in you local machine but you will not use localhost anymore after you deploy.<br />
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This document is about how you run your project in 2 different modes
 
-### `npm test`
+### `npm install json-server --save-dev`
+You will use 'json-server' to run your server, but you dont need that json-server for production mode (because we will use 
+https://my-json-server.typicode.com/ this server for production mode).
+So you need to download json-server only for development mode. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+run this in your terminal
+```
+npm install json-server --save-dev
+```
 
-### `npm run build`
+After that, you will get `"devDependencies` in you package.json file
+```
+"devDependencies": {
+    "dotenv": "^8.2.0",
+    "json-server": "^0.16.1"
+  }
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm run dev`
+You can make your own scripts in package.json. Inside of script, add this line
+```
+ "dev": "json-server --watch db.json -p 3001 && start react-scripts start",
+```
+It means, when you use `npm run dev`, it will run the json-server first and then it will run the app. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### `.env`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You need .env file, and inside of .env file you will have `REACT_APP_BACKEND_SERVER_URL` which has the value of your server URL so if you run in you local machine, the value will be `http://localhost:3001`. But if you run in production mode, you should change the value to `https://my-json-server.typicode.com/user/repo`
 
-### `npm run eject`
+When you push your source code. Don't push your .env file. (add .env into .gitignore)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Set environment value at your Netlify
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**This is after you push your source code to github and deploy to Netlify**
+1. Get into the Build & deploy menu
+![](https://imgur.com/CTMw2d8.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+2. Add Environment value here. the variable name mush be same with the one you use in you local machine. 
+   But the value will be different. put the my-json server url as a value
+![](https://imgur.com/liosOM9.png)

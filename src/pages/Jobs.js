@@ -19,8 +19,7 @@ export default function Jobs() {
   let [keyword, setKeyword] = useState(query.get(QUERYSTR_PREFIX));
 
   const getData = async () => {
-    //let url ="http://localhost:3001/jobs";
-    let url = `https://my-json-server.typicode.com/legobitna/Itviec/jobs`;
+    let url =`${process.env.REACT_APP_BACKEND_SERVER_URL}/jobs`;
     let data = await fetch(url);
     let result = await data.json();
     setOriginalJobs(result);

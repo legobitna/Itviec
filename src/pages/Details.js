@@ -13,12 +13,9 @@ export default function Details() {
   let [job, setJob] = useState(null);
 
   const getData = async () => {
-    //let url = `http://localhost:3001/jobs/${id}`
-    let url = `https://my-json-server.typicode.com/legobitna/Itviec/jobs/${id}`;
-
+    let url = `${process.env.REACT_APP_BACKEND_SERVER_URL}/jobs/${id}`;
     let data = await fetch(url);
     let result = await data.json();
-
     setJob(result);
   };
   useEffect(() => {
@@ -54,7 +51,7 @@ export default function Details() {
             <Col xs={10}>
               <h2>{job.title}</h2>
               <div>
-                {job.tags.map(tag => (
+                {job.tags.map((tag) => (
                   <Badge variant="secondary" className="badge-style">
                     {tag}
                   </Badge>
@@ -84,7 +81,7 @@ export default function Details() {
               <div style={{ paddingTop: "20px" }}>
                 <h2>Benefit</h2>
                 <ul className="benefit-list" style={{ fontSize: "18px" }}>
-                  {job.benefits.map(benefit => (
+                  {job.benefits.map((benefit) => (
                     <li>{benefit}</li>
                   ))}
                 </ul>
