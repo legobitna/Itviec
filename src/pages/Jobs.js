@@ -23,7 +23,6 @@ export default function Jobs() {
     console.log("url",url)
     let data = await fetch(url);
     let result = await data.json();
-    console.log("result",result)
     setOriginalJobs(result);
   };
 
