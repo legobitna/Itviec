@@ -9,7 +9,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const QUERYSTR_PREFIX = "q";
+  const QUERYSTR_PREFIX = "q";
 
 export default function Jobs() {
   let [originalJobs, setOriginalJobs] = useState([]);
@@ -23,11 +23,15 @@ export default function Jobs() {
     console.log("url",url)
     let data = await fetch(url);
     let result = await data.json();
+    console.log("rr",result)
     setOriginalJobs(result);
+    //setJobs(result)
   };
 
   const handleSearch = (e) => {
     let filteredJobs = originalJobs;
+   //let filteredJobs = [];
+    console.log("hehe",keyword)
     if (e) {
       e.preventDefault();
       history.push(`/jobs/?${QUERYSTR_PREFIX}=${encodeURIComponent(keyword)}`);
@@ -36,8 +40,10 @@ export default function Jobs() {
       filteredJobs = originalJobs.filter(job =>
         job.title.toLowerCase().includes(keyword.toLowerCase())
       );
+      //setJobs(filteredJobs);
     }
-    setJobs(filteredJobs);
+    console.log("filterdjob",filteredJobs)
+     setJobs(filteredJobs);
   };
 
   useEffect(() => {

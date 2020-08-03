@@ -6,6 +6,7 @@ import Jobs from "./pages/Jobs";
 import Login from "./pages/Login";
 import Details from "./pages/Details";
 import { useSelector } from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   let user = useSelector((state) => state.user);
 

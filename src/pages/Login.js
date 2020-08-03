@@ -1,20 +1,26 @@
 import React from "react";
-import { Form, Button, Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Form, Button, Container, Alert } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import * as authAction from "../store/actions/authaction";
 
 export default function Login() {
   let email = "";
   let password = "";
   const dispatch = useDispatch();
-  const history = useHistory();
+  let error = useSelector((state) => state.error);
+  let user = useSelector((state) => state.user);
+  let loading = useSelector((state) => state.loading);
 
   const login = (e) => {
     e.preventDefault();
     let user = { email: email, password: password };
-    dispatch({ type: "LOGIN", payload: user });
-    history.goBack();
+    dispatch(authAction.middlewareLogin(user));
   };
+
+  if (user.isAuthenticated == true) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="App">
       <div className="navigation">
@@ -26,6 +32,7 @@ export default function Login() {
           />
         </Container>
       </div>
+      {error ? <Alert variant="danger">{error}</Alert> : <></>}
       <Container className="middle">
         <Form className="white-container" onSubmit={(e) => login(e)}>
           <div className="login-title-box">
@@ -55,9 +62,13 @@ export default function Login() {
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
-          <Button variant="danger" type="submit">
-            Submit
-          </Button>
+          {loading ? (
+            <div>loading...</div>
+          ) : (
+            <Button variant="danger" type="submit">
+              Submit
+            </Button>
+          )}
         </Form>
       </Container>
     </div>
