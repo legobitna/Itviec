@@ -28,8 +28,9 @@ function reducer(state = initialstate, action) {
       state.user.isAuthenticated = false;
       break;
   }
+  console.log("state", state, "user", state.user);
 
-  return state;
+  return { ...state };
 }
 
 export default reducer;
