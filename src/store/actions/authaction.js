@@ -21,6 +21,7 @@ export const middlewareLogin = (user) => {
     try {
       if (!user || !user.email || !user.password) {
         // fail situation
+        console.log("error here", user);
         dispatch(fail("you didnt give us email or password"));
         return;
       }

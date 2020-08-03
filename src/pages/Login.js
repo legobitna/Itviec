@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as authAction from "../store/actions/authaction";
 
 export default function Login() {
-  let email = "";
-  let password = "";
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
   const dispatch = useDispatch();
   let error = useSelector((state) => state.error);
   let user = useSelector((state) => state.user);
@@ -15,6 +15,7 @@ export default function Login() {
   const login = (e) => {
     e.preventDefault();
     let user = { email: email, password: password };
+    console.log("login user", user);
     dispatch(authAction.middlewareLogin(user));
   };
 
@@ -44,7 +45,7 @@ export default function Login() {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              onChange={(e) => (email = e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
@@ -56,7 +57,7 @@ export default function Login() {
             <Form.Control
               type="password"
               placeholder="Password"
-              onChange={(e) => (password = e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
